@@ -1,0 +1,44 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --shaurya-red: #e10600;
+  --shaurya-red-light: #ff4b2b;
+  --shaurya-black: #0b0f1a;
+  --shaurya-dark: #111418;
+  --shaurya-white: #ffffff;
+  --shaurya-gray: #bfc6d4;
+}
+
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  line-height: 1.6;
+  background: var(--shaurya-black);
+  color: var(--shaurya-white);
+}
+
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* Utility */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
