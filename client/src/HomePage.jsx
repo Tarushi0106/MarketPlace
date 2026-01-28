@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './HomePage.css';
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
+
 
 const HomePage = () => {
+  const navigate = useNavigate();
+const industriesRef = useRef(null);
+
+const scrollToIndustries = () => {
+  industriesRef.current?.scrollIntoView({ behavior: "smooth" });
+};
+
   const [counters, setCounters] = useState({
     retailers: 0,
     uptime: 0,
@@ -55,24 +64,75 @@ const HomePage = () => {
     { icon: 'fas fa-code', title: 'APIs', desc: 'Developer-ready APIs' },
     { icon: 'fas fa-shopping-cart', title: 'E-Commerce', desc: 'Digital product marketplace' }
   ];
-
+const industries = [
+  {
+    icon: "fas fa-university",
+    title: "BFSI",
+    desc: "Secure and intelligent credit processing, onboarding & reconciliation platforms."
+  },
+  {
+    icon: "fas fa-heartbeat",
+    title: "Healthcare",
+    desc: "Back-office automation, patient records, telemedicine integration, billing & diagnostics."
+  },
+  {
+    icon: "fas fa-graduation-cap",
+    title: "Education Management",
+    desc: "Digital learning platforms, smart ID kiosks, and automation in exams & operations."
+  },
+  {
+    icon: "fas fa-signal",
+    title: "Telecom Services",
+    desc: "Customer support automation, onboarding verification, fraud detection, and compliance."
+  },
+  {
+    icon: "fas fa-shopping-bag",
+    title: "Retail & E-Commerce",
+    desc: "Smart kiosks, checkout automation, inventory intelligence, and customer engagement tools."
+  },
+  {
+    icon: "fas fa-landmark",
+    title: "Government & PSU",
+    desc: "Digital automation for public services and citizen engagement."
+  },
+  {
+    icon: "fas fa-photo-video",
+    title: "Media & Entertainment",
+    desc: "OTT platforms, digital streaming support, audience analytics, and content delivery automation."
+  },
+  {
+    icon: "fas fa-truck",
+    title: "Logistics Services",
+    desc: "Fleet management, smart kiosks, tracking platforms, AI-driven delivery automation."
+  },
+  {
+    icon: "fas fa-plane",
+    title: "Travel & Hospitality",
+    desc: "Self-service kiosks, check-in automation, smart feedback systems, and booking engines."
+  }
+];
   return (
        <>
-      <Navbar />
-    <div className="home-page">
+        <Navbar />
+<Navbar onIndustryClick={scrollToIndustries} />    <div className="home-page">
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-bg"></div>
         <div className="hero-content">
           <h1 className="hero-title">
-            Your Digital Marketplace <span className="highlight">with Shaurya</span>
+          The Digital Solution for growing companies <span className="highlight">with Shaurya</span>
           </h1>
           <p className="hero-subtitle">
-            Telecom, digital services, APIs & payments — one unified platform.
+          The Right Digital Solution. In 10 Seconds
           </p>
           <div className="hero-buttons">
             <button className="btn-primary">Explore Marketplace</button>
-            <button className="btn-secondary">Get Started</button>
+        <button
+className="btn-secondary"
+onClick={() => navigate("/products")}
+>
+View Solutions
+</button>
           </div>
           
           {/* Stats Section */}
@@ -97,52 +157,22 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section className="services-preview">
-        <div className="section-header">
-          <h2>Marketplace Services</h2>
-          <p>All major telecom & digital services in one place.</p>
-        </div>
-        <div className="services-grid">
-          {services.map((service, index) => (
-            <div key={index} className="service-card" style={{animationDelay: `${index * 0.1}s`}}>
-              <div className="service-icon">
-                <i className={service.icon}></i>
-              </div>
-              <h3>{service.title}</h3>
-              <p>{service.desc}</p>
-              <a href="#" className="service-link">Learn More →</a>
-            </div>
-          ))}
-        </div>
-      </section>
+{/* Industries Section */}
+<section className="industries-section" ref={industriesRef}>
+<div className="industries-grid">
+{industries.map((item, index) => (
+<div key={index} className="industry-card">
+<div className="industry-icon">
+<i className={item.icon}></i>
+</div>
+<h3>{item.title}</h3>
+<p>{item.desc}</p>
+</div>
+))}
+</div>
+</section>
 
-      {/* Features Section */}
-      <section className="features-section">
-        <div className="features-container">
-          <div className="feature-card">
-            <div className="feature-icon">
-              <i className="fas fa-shield-alt"></i>
-            </div>
-            <h3>Enterprise Security</h3>
-            <p>End-to-end encrypted APIs and transactions.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">
-              <i className="fas fa-chart-line"></i>
-            </div>
-            <h3>Real-time Analytics</h3>
-            <p>Live dashboards and instant insights.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">
-              <i className="fas fa-globe"></i>
-            </div>
-            <h3>Global Scale</h3>
-            <p>Built for millions of daily transactions.</p>
-          </div>
-        </div>
-      </section>
+
 
       {/* CTA Section */}
       <section className="cta-section">

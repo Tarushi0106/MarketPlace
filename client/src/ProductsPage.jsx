@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProductsPage.css";
+import ProductsNavbar from "./ProductsNavbar";
 
 const products = [
   {
@@ -21,25 +22,29 @@ const products = [
 
 const ProductsPage = () => {
   return (
-    <div className="products-page">
-      <section className="products-hero">
-        <h1>Products</h1>
-        <p>Trusted software solutions for your business.</p>
-      </section>
+    <>
+      <ProductsNavbar />
 
-      <section className="products-grid-section">
-        <div className="products-grid">
-          {products.map((product, index) => (
-            <div key={index} className="product-card">
-              <img src={product.logo} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p>{product.desc}</p>
-              <button className="btn-primary">View Details</button>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+      <div className="products-page">
+        <section className="products-hero">
+          <h1>Products</h1>
+          <p>Trusted software solutions for your business.</p>
+        </section>
+
+        <section className="products-grid-section">
+          <div className="products-grid">
+            {products.map((product, index) => (
+              <div key={index} className="product-card">
+                <img src={product.logo} alt={product.name} />
+                <h3>{product.name}</h3>
+                <p>{product.desc}</p>
+                <button className="btn-primary">View Details</button>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
 

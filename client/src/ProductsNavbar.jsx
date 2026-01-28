@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const Navbar = ({ onIndustryClick }) => {
   return (
-    
     <nav className="navbar">
       <div className="navbar-left">
         <img src={logo} alt="Shaurya Logo" className="navbar-logo" />
@@ -13,18 +12,17 @@ const Navbar = ({ onIndustryClick }) => {
 
       <ul className="navbar-links">
  
-            <li>Products</li>
-        <li>Plans</li>
-        <li>Why NetNxt</li>
-        <li>Comparison</li>
+            <li>Cloud & Infrastructure</li>
+        <li>Business Applications</li>
+        <li>Workplace & Colloboration</li>
+        <li>CybersecurityAcronis Cyber Security</li>
 
         {/* 👇 THIS IS THE IMPORTANT PART */}
-        <li onClick={onIndustryClick} style={{ cursor: "pointer" }}>
-          Industries We Serve
+        <li> Data, AI & Intelligence
         </li>
 
-        <li>About Us</li>
-        <li>Contact Us</li>
+        <li>Industry Solutions</li>
+        <li>Get pricing</li>
       </ul>
 
       <div className="navbar-right">

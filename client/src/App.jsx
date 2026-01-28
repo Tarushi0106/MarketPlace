@@ -8,7 +8,7 @@ import ProductsPage from "./ProductsPage";
 const App = () => {
   return (
     <>
-      <Navbar />
+     
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
