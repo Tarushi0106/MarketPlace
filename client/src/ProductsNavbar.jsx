@@ -1,72 +1,76 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import logo from "./assets/shaurya-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = ({ onIndustryClick }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // 🔄 check auth on route change
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("token"));
+  }, [location.pathname]);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
+
   return (
     <nav className="navbar">
       
-      {/* Left Section - Logo */}
+      {/* LEFT */}
       <div className="navbar-left">
         <Link to="/">
-          <img 
-            src={logo} 
-            alt="Shaurya Logo" 
-            className="navbar-logo" 
-          />
+          <img src={logo} alt="Shaurya Logo" className="navbar-logo" />
         </Link>
       </div>
 
-      {/* Center Section - Navigation Links */}
+      {/* CENTER */}
       <div className="navbar-center">
         <ul className="navbar-links">
-          
-          <li>
-            <span>Cloud & Infrastructure</span>
-          </li>
-          
-          <li>
-            <span>Business Applications</span>
-          </li>
-{/*           
-          <li>
-            <span>Workplace & Collaboration</span>
-          </li> */}
-          
-          <li>
-            <span>Cybersecurity</span>
-          </li>
-          
-          <li>
-            <span>Data, AI & Intelligence</span>
-          </li>
-          
-          <li 
-            onClick={onIndustryClick} 
-            className="industry-link"
-          >
+          <li><span>Cloud & Infrastructure</span></li>
+          <li><span>Business Applications</span></li>
+          <li><span>Cybersecurity</span></li>
+          <li><span>Data, AI & Intelligence</span></li>
+
+          <li onClick={onIndustryClick} className="industry-link">
             <span>Industry Solutions</span>
           </li>
-          
-          <li>
-            <span>Get Pricing</span>
-          </li>
-          
+
+          <li><span>Get Pricing</span></li>
         </ul>
       </div>
 
-      {/* Right Section - Action Buttons */}
+      {/* RIGHT – AUTH */}
       <div className="navbar-right">
-        
-        <button className="nav-btn-outline">
-          Login
-        </button>
-        
-        <button className="nav-btn-primary">
-          Get Started
-        </button>
-        
+        {!isLoggedIn ? (
+          <>
+            <button
+              className="nav-btn-outline"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+
+            <button
+              className="nav-btn-primary"
+              onClick={() => navigate("/signup")}
+            >
+              Get Started
+            </button>
+          </>
+        ) : (
+          <button
+            className="nav-btn-outline"
+            onClick={logout}
+          >
+            Sign Out
+          </button>
+        )}
       </div>
       
     </nav>

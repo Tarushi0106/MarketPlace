@@ -1,0 +1,114 @@
+/* PAGE */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+/* CARD */
+.auth-box {
+  width: 340px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid #e10600;
+  padding: 26px 24px;
+  animation: slideFade 0.35s ease;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* HEADER */
+.auth-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.auth-header p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 18px;
+}
+
+/* FORM */
+.auth-group {
+  margin-bottom: 14px;
+}
+
+.auth-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.auth-group input {
+  width: 100%;
+  padding: 9px 11px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.auth-group input:focus {
+  border-color: #e10600;
+}
+
+/* BUTTON */
+.auth-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  background: #e10600;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.auth-btn:hover {
+  background: #c90500;
+  transform: translateY(-1px);
+}
+
+/* FOOTER */
+.auth-footer {
+  text-align: center;
+  font-size: 12px;
+  color: #555;
+  margin-top: 14px;
+}
+
+.auth-footer a {
+  color: #e10600;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* TRUST */
+.auth-trust {
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+  margin-top: 10px;
+}

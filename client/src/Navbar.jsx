@@ -1,35 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import logo from "./assets/shaurya-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = ({ onIndustryClick }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const checkAuth = () => {
+    setIsLoggedIn(!!localStorage.getItem("token"));
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, [location.pathname]); // 🔥 re-check on route change
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
+
   return (
-    
     <nav className="navbar">
+
+      {/* LEFT */}
       <div className="navbar-left">
-        <img src={logo} alt="Shaurya Logo" className="navbar-logo" />
+        <Link to="/">
+          <img src={logo} alt="Shaurya Logo" className="navbar-logo" />
+        </Link>
       </div>
 
-      <ul className="navbar-links">
- 
-            <li>Products</li>
-        <li>Plans</li>
-        <li>Why NetNxt</li>
-        <li>Comparison</li>
+      {/* CENTER */}
+      <div className="navbar-center">
+        <ul className="navbar-links">
+          <li>Cloud & Infrastructure</li>
+          <li>Business Applications</li>
+          <li>Cybersecurity</li>
+          <li>Data, AI & Intelligence</li>
 
-        {/* 👇 THIS IS THE IMPORTANT PART */}
-        <li onClick={onIndustryClick} style={{ cursor: "pointer" }}>
-          Industries We Serve
-        </li>
+          <li onClick={onIndustryClick} className="industry-link">
+            Industry Solutions
+          </li>
 
-        <li>About Us</li>
-        <li>Contact Us</li>
-      </ul>
+          <li>Pricing</li>
+          <li>About Us</li>
+          <li>Contact</li>
+        </ul>
+      </div>
 
+      {/* RIGHT */}
       <div className="navbar-right">
-        <button className="nav-btn-outline">Login</button>
-        <button className="nav-btn-primary">Get Started</button>
+        {!isLoggedIn ? (
+          <>
+            <button
+              className="nav-btn-outline"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+
+            <button
+              className="nav-btn-primary"
+              onClick={() => navigate("/signup")}
+            >
+              Get Started
+            </button>
+          </>
+        ) : (
+          <button
+            className="nav-btn-outline"
+            onClick={logout}
+          >
+            Sign Out
+          </button>
+        )}
       </div>
     </nav>
   );
