@@ -2,6 +2,31 @@ import React, { useEffect, useState, useRef } from "react";
 import "./ProductsPage.css";
 import ProductsNavbar from "./ProductsNavbar";
 import { motion, useInView } from "framer-motion";
+const StarRating = () => {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+
+  return (
+    <div style={{ display: "flex", gap: "4px" }}>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <span
+          key={star}
+          style={{
+            fontSize: "22px",
+            cursor: "pointer",
+            color: star <= (hover || rating) ? "#f5b301" : "#ccc",
+            transition: "color 0.2s"
+          }}
+          onClick={() => setRating(star)}
+          onMouseEnter={() => setHover(star)}
+          onMouseLeave={() => setHover(0)}
+        >
+          ★
+        </span>
+      ))}
+    </div>
+  );
+};
 
 const products = [
   {
@@ -36,7 +61,7 @@ const products = [
   },
   {
     id: 3,
-    name: "Microsoft 365 Business",
+    name: "Microsoft 365 Business Basic",
     desc: "Complete productivity suite with AI-powered tools, enterprise security, and seamless collaboration.",
     category: "Microsoft 365 Business",
     features: [
@@ -45,7 +70,7 @@ const products = [
       "1TB Cloud Storage",
       "24/7 Support"
     ],
-    price: "$22.99/user/month",
+    price: "Rs 135.00/user/month",
     rating: 4.9,
     reviews: 5600
   },
@@ -223,66 +248,57 @@ const ProductsPage = () => {
               }}
             >
               {filteredProducts.map((product) => (
-                <motion.div
-                  key={product.id}
-                  className="product-card"
-                  variants={{
-                    hidden: { opacity: 0, y: 30 },
-                    visible: { opacity: 1, y: 0 }
-                  }}
-                  whileHover={{ 
-                    y: -10,
-                    boxShadow: "0 25px 50px -12px rgba(225, 6, 0, 0.25)"
-                  }}
-                >
-                  {/* Product Badge */}
-                  <div className="product-badge">
-                    <span className="badge-category">{product.category}</span>
-                    <div className="badge-rating">
-                      <i className="fas fa-star"></i>
-                      <span>{product.rating}</span>
-                      <span className="reviews">({product.reviews.toLocaleString()} reviews)</span>
-                    </div>
-                  </div>
+             <motion.div
+  key={product.id}
+  className="product-card"
+  variants={{
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 }
+  }}
+  whileHover={{ 
+    y: -10,
+    boxShadow: "0 25px 50px -12px rgba(225, 6, 0, 0.25)"
+  }}
+>
 
-                  {/* Product Info */}
-                  <div className="product-info">
-                    <div className="product-header">
-                      <h3>{product.name}</h3>
-                      <div className="product-price">
-                        <span className="price">{product.price}</span>
-                        <span className="price-period">per month</span>
-                      </div>
-                    </div>
-                    
-                    <p className="product-description">{product.desc}</p>
-                    
-                    {/* Features */}
-                    <div className="product-features">
-                      <h4>Key Features:</h4>
-                      <div className="features-list">
-                        {product.features.map((feature, idx) => (
-                          <div key={idx} className="feature">
-                            <i className="fas fa-check-circle"></i>
-                            <span>{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+  <div className="product-info">
 
-                    {/* Price & CTA */}
-                    <div className="product-cta">
-                      <button className="btn-secondary">
-                        <i className="fas fa-info-circle"></i>
-                        View Details
-                      </button>
-                      <button className="btn-primary">
-                        <i className="fas fa-cart-plus"></i>
-                        Get Started
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
+    <h3>{product.name}</h3>
+
+    <p className="product-description">
+      {product.desc}
+    </p>
+
+    {/* ⭐ USER STAR RATING */}
+    <div style={{ margin: "10px 0" }}>
+      <span style={{ fontSize: "13px", color: "#777" }}>
+        Rate this product:
+      </span>
+      <StarRating />
+    </div>
+
+    {/* FEATURES */}
+    <div className="product-features">
+      {product.features.map((feature, idx) => (
+        <div key={idx} className="feature">
+          <i className="fas fa-check-circle"></i>
+          <span>{feature}</span>
+        </div>
+      ))}
+    </div>
+
+    {/* CTA */}
+    <div className="product-cta">
+      <button className="btn-primary">
+        <i className="fas fa-cart-plus"></i>
+        Buy Now
+      </button>
+    </div>
+
+  </div>
+
+</motion.div>
+
               ))}
             </motion.div>
 
