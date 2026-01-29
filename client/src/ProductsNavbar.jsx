@@ -60,7 +60,7 @@ const Navbar = ({ onIndustryClick }) => {
               className="nav-btn-primary"
               onClick={() => navigate("/signup")}
             >
-              Get Started
+            Sign in
             </button>
           </>
         ) : (
