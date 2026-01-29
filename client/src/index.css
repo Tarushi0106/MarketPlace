@@ -4,7 +4,10 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
 :root {
   --shaurya-red: #e10600;
   --shaurya-red-light: #ff4b2b;
